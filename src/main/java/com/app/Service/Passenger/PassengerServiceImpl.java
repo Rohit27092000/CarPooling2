@@ -15,7 +15,7 @@ public class PassengerServiceImpl implements PassengerService {
 	
 	
 	@Override
-	public Passenger getbyId(int theId) {
+	public Passenger getPassengerbyId(int theId) {
 		// TODO Auto-generated method stub
 		Optional<Passenger> p = passengerRepository.findById(theId);
 		Passenger pass = p.get();
@@ -24,7 +24,7 @@ public class PassengerServiceImpl implements PassengerService {
 
 
 	@Override
-	public Passenger getByUserId(int userId) {
+	public Passenger getPassengerByUserId(int userId) {
 		// TODO Auto-generated method stub
 		Passenger p = passengerRepository.findByUserId(userId);
 		return p;

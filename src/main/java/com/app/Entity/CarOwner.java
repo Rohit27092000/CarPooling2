@@ -15,25 +15,25 @@ import javax.persistence.Table;
 public class CarOwner {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
-@Column(name="CarOwner_Id")
-private  int carOwner;
+@Column(name="car_owner_id")
+private  int CarOwnerId;
 
 @OneToOne(cascade = CascadeType.ALL)
-@JoinColumn(name="user_Id",nullable = false)
+@JoinColumn(name="user_id",nullable = false)
 private User user;
 
-@Column(name="AdharCard_No",nullable = false)
+@Column(name="adhar_card_no",nullable = false)
 private int adharCard_No;
 
 @Column(name="driving_licence_no",nullable = false)
 private String driving_Licence_No;
 
-public int getCarOwner() {
-	return carOwner;
+public int getCarOwnerId() {
+	return CarOwnerId;
 }
 
-public void setCarOwner(int carOwner) {
-	this.carOwner = carOwner;
+public void setCarOwnerId(int CarOwnerId) {
+	this.CarOwnerId = CarOwnerId;
 }
 
 public User getUser() {
@@ -62,9 +62,8 @@ public void setDriving_Licence_No(String driving_Licence_No) {
 
 @Override
 public String toString() {
-	return "CarOwner [carOwner=" + carOwner + ", user=" + user + ", adharCard_No=" + adharCard_No
+	return "CarOwner [CarOwnerId=" + CarOwnerId + ", user=" + user + ", adharCard_No=" + adharCard_No
 			+ ", driving_Licence_No=" + driving_Licence_No + "]";
 }
-
 
 }

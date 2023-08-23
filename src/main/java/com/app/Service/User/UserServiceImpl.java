@@ -22,4 +22,24 @@ public class UserServiceImpl implements UserService{
 		return user;
 	}
 
+	@Override
+	public String RegisterUser(User theUser) {
+		// TODO Auto-generated method stub
+		userRepository.save(theUser);
+		return "Success";
+	}
+
+	@Override
+	public User validateUser(String email, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User updateUser(User theUser) {
+		
+		User user = userRepository.save(theUser);
+		return user;
+	}
+
 }

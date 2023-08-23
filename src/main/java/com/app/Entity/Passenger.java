@@ -61,5 +61,11 @@ public void setDriving_Licence_No(String driving_Licence_No) {
 	this.driving_Licence_No = driving_Licence_No;
 }
 
+@Override
+public String toString() {
+	return "Passenger [passenger_Id=" + passenger_Id + ", user=" + user + ", aadharCard_No=" + aadharCard_No
+			+ ", driving_Licence_No=" + driving_Licence_No + "]";
+}
+
 
 }

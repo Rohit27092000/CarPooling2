@@ -27,4 +27,42 @@ public class Car {
  private String model;
  @Column(name="car_no")
  private String CarNo;
+ 
+public Integer getCar_Id() {
+	return car_Id;
+}
+public void setCar_Id(Integer car_Id) {
+	this.car_Id = car_Id;
+}
+public CarOwner getCarOwner() {
+	return carOwner;
+}
+public void setCarOwner(CarOwner carOwner) {
+	this.carOwner = carOwner;
+}
+public String getCompany() {
+	return company;
+}
+public void setCompany(String company) {
+	this.company = company;
+}
+public String getModel() {
+	return model;
+}
+public void setModel(String model) {
+	this.model = model;
+}
+public String getCarNo() {
+	return CarNo;
+}
+public void setCarNo(String carNo) {
+	CarNo = carNo;
+}
+@Override
+public String toString() {
+	return "Car [car_Id=" + car_Id + ", carOwner=" + carOwner + ", company=" + company + ", model=" + model + ", CarNo="
+			+ CarNo + "]";
+}
+ 
+ 
 }

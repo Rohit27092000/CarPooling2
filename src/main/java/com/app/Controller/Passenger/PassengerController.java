@@ -1,6 +1,7 @@
 package com.app.Controller.Passenger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import com.app.Entity.User;
 import com.app.Service.Passenger.PassengerService;
 import com.app.Service.User.UserService;
 
+@CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 @RequestMapping("/passengers")
 public class PassengerController {
@@ -26,14 +28,14 @@ public class PassengerController {
 	@GetMapping("/getPassenger/{passId}")
 	public Passenger getById(@PathVariable int passId)
 	{
-		Passenger p= passengerService.getbyId(passId);
+		Passenger p= passengerService.getPassengerbyId(passId);
 		return p;
 	}
 	
 	@GetMapping("/getPassByUserId/{userId}")
 	 public Passenger getByUserId(@PathVariable int userId) 
 	 { 
-		 Passenger p = passengerService.getByUserId(userId);
+		 Passenger p = passengerService.getPassengerByUserId(userId);
 		 return p;
 	 }
 	 

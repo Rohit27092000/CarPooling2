@@ -21,11 +21,11 @@ public class Trip {
  @Column(name="trip_Id")
  private int trip_Id;
     
- @OneToOne(cascade = CascadeType.ALL)
+ @OneToOne(cascade = CascadeType.PERSIST)
  @JoinColumn(name = "CarOwner_Id",nullable = false)
  private CarOwner carOwner;
     
- @OneToOne(cascade = CascadeType.ALL)
+ @OneToOne(cascade = CascadeType.PERSIST)
  @JoinColumn(name = "Car_Id",nullable = false)
  private Car car;
     
@@ -116,6 +116,8 @@ public String toString() {
 			+ ", destinationCity=" + destinationCity + ", seats_offer=" + seats_offer + ", total_cost=" + total_cost
 			+ ", tripDate=" + tripDate + "]";
 }
+
+
  
  
  

@@ -12,11 +12,11 @@ import javax.persistence.Table;
 public class City {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="city_Id")
+    @Column(name="city_id")
 	private Integer city_Id;
 	
-    @Column(name="City_Name")
-    private String City_Name;
+    @Column(name="city_name")
+    private String cityName;
     
     @Column(name="state")
     private String state;
@@ -32,12 +32,12 @@ public class City {
 		this.city_Id = city_Id;
 	}
 
-	public String getCity_Name() {
-		return City_Name;
+	public String getCityName() {
+		return cityName;
 	}
 
-	public void setCity_Name(String city_Name) {
-		City_Name = city_Name;
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
 	}
 
 	public String getState() {
@@ -58,9 +58,9 @@ public class City {
 
 	@Override
 	public String toString() {
-		return "City [city_Id=" + city_Id + ", City_Name=" + City_Name + ", state=" + state + ", country=" + country
+		return "City [city_Id=" + city_Id + ", cityName=" + cityName + ", state=" + state + ", country=" + country
 				+ "]";
 	}
-    
-    
+
+
 }
