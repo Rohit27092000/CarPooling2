@@ -31,6 +31,14 @@ public class CarserviceImpl implements CarService{
 		return car;
 	}
 
+	@Override
+	public String addCar(Car theCar) {
+		// TODO Auto-generated method stub
+		carRepository.save(theCar);
+		
+		return "Seccess "+theCar.getModel();
+	}
+
 	
 
 }

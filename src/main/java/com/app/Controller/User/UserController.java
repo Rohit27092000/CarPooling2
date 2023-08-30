@@ -1,8 +1,14 @@
 package com.app.Controller.User;
 
+import java.io.Serializable;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,39 +37,60 @@ public class UserController {
 	
 	/*API to register users*/
 	@PostMapping("/registerUsers")
-	public String RegisterUser(@RequestBody User theUser)
+	public String RegisterUser(@RequestBody @Valid User theUser,BindingResult result)
 	{
-		theUser.setId(0);
-		System.out.println(theUser.toString());
-		userService.RegisterUser(theUser);
-		return "successfully Register"+theUser.getFirstName();	
+		if(result.hasErrors())
+		{
+			return result.toString();
+		
+		}
+		else {
+			theUser.setId(0);
+			System.out.println(theUser.toString());
+			userService.RegisterUser(theUser);
+			return "successfully Register"+theUser.getFirstName();	
+		}
 	}
-	
 	/*API to Login users using EmailId and Password */
 	@PostMapping("/loginUser")
-	public User submitUser(@RequestBody User user)
+	public User submitUser(@RequestBody @Valid User user , BindingResult result) throws CustomException
 	{
 		System.out.println(user.toString());
 		User u = null;
 		
 		
-			u= userService.validateUser(user.getEmail(),user.getPassword());
-
+		if(result.hasErrors()){
+			//return null;
+	
+		}else{
+			u= userService.validateUser(user.getEmail(), user.getPassword());
+		}
+		
 		System.out.println(u);
 		
 		if(u==null)
 		{
-			return null;
+			throw new CustomException("Wrong EmailId and Password");
+			//return null;
 		}
 		else
 		{
 			return u;
 		}
 	}
+	
+	@PatchMapping("/UpdateUser")
 	public User updateUser(@RequestBody User theUser)
 	{
 		User u = userService.updateUser(theUser);
-		return u;
+		return u;	
+	}
+	
+	public class CustomException extends Exception implements Serializable{
+		
+		public CustomException(String errorMessage) {
+			super(errorMessage); 
+		}
 		
 	}
 }

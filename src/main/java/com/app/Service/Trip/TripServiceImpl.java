@@ -1,11 +1,14 @@
 package com.app.Service.Trip;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.Entity.CarOwner;
+import com.app.Entity.City;
 import com.app.Entity.Trip;
 import com.app.Repository.Trip.TripRepository;
 
@@ -37,5 +40,17 @@ public class TripServiceImpl implements TripService{
 		return "Success";
 	}
 
+	@Override
+	 public List<Trip> getTripsByCriteria(City sourceCity, City destinationCity, LocalDate tripDate) 
+	{
+        return tripRepository.findBySourceCityAndDestinationCityAndTripDate(sourceCity, destinationCity, tripDate);
+	}
+
+	/*
+	 * @Override public List<Trip> getTripByCity(int sourceCityId, int
+	 * destinationCityId, LocalDate date) { // TODO Auto-generated method stub
+	 * return tripRepository.getTripBysourceCitydestinationCity(sourceCityId,
+	 * destinationCityId, date); }
+	 */
 
 }

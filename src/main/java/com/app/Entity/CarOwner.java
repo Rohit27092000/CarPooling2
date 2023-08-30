@@ -9,6 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.MetaValue;
+import org.springframework.format.annotation.NumberFormat;
 
 @Entity
 @Table(name="carowner")
@@ -19,21 +23,25 @@ public class CarOwner {
 private  int CarOwnerId;
 
 @OneToOne(cascade = CascadeType.ALL)
-@JoinColumn(name="user_id",nullable = false)
+@JoinColumn(name="user_id",nullable = false, unique = true)
 private User user;
 
-@Column(name="adhar_card_no",nullable = false)
-private int adharCard_No;
 
-@Column(name="driving_licence_no",nullable = false)
+@NumberFormat
+//@Size(min = 12,max = 12 , message = "Aadhar card Number should 12 digit only")
+@Column(name="adhar_card_no",nullable = false , unique = true)
+private long adharCard_No;
+
+
+@Column(name="driving_licence_no",nullable = false , unique = true)
 private String driving_Licence_No;
 
 public int getCarOwnerId() {
 	return CarOwnerId;
 }
 
-public void setCarOwnerId(int CarOwnerId) {
-	this.CarOwnerId = CarOwnerId;
+public void setCarOwnerId(int carOwnerId) {
+	CarOwnerId = carOwnerId;
 }
 
 public User getUser() {
@@ -44,11 +52,11 @@ public void setUser(User user) {
 	this.user = user;
 }
 
-public int getAdharCard_No() {
+public long getAdharCard_No() {
 	return adharCard_No;
 }
 
-public void setAdharCard_No(int adharCard_No) {
+public void setAdharCard_No(long adharCard_No) {
 	this.adharCard_No = adharCard_No;
 }
 
@@ -65,5 +73,6 @@ public String toString() {
 	return "CarOwner [CarOwnerId=" + CarOwnerId + ", user=" + user + ", adharCard_No=" + adharCard_No
 			+ ", driving_Licence_No=" + driving_Licence_No + "]";
 }
+
 
 }

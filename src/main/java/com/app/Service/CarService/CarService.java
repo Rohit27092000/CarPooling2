@@ -10,4 +10,6 @@ public interface CarService {
 
 	public Car getById(int theId);
 	public List<Car> getCarByCarOwner(CarOwner theCarOwner);
+	public String addCar(Car theCar);
+
 }

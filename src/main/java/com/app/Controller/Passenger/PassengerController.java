@@ -1,6 +1,9 @@
 package com.app.Controller.Passenger;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,17 +43,21 @@ public class PassengerController {
 	 }
 	 
 	@PostMapping("/addPassengers")
-	public String addPassenger(@RequestBody Passenger thePassenger)
+	public String addPassenger(@RequestBody @Valid Passenger thePassenger, BindingResult result)
 	{
-		System.out.println(thePassenger.toString());
-		int userId = thePassenger.getUser().getId();
-		User theUser = userService.findById(userId);
-		thePassenger.setUser(theUser);
-		
-		thePassenger.setPassenger_Id(0);
-		
-		
-		return passengerService.addPassenger(thePassenger);
-		
+		if(result.hasErrors())
+		{
+			return result.toString();
+		}
+		else
+		{
+			System.out.println(thePassenger.toString());
+			int userId = thePassenger.getUser().getId();
+			User theUser = userService.findById(userId);
+			
+			thePassenger.setUser(theUser);
+			thePassenger.setPassenger_Id(0);
+			return passengerService.addPassenger(thePassenger);
+		}
 	}
 }

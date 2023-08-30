@@ -1,5 +1,7 @@
 package com.app.Controller.Trip;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -68,4 +70,19 @@ public class tripController {
 		System.out.println(theTrip.toString());
 		return tripService.addTrip(theTrip);
 	}
+	
+	
+	  @GetMapping("/getTripByCity") 
+	  public List<Trip> getTripByCity(@RequestBody Trip theTrip) 
+	  { 
+		  City soucrceCity = cityService.getByCityName(theTrip.getSourceCity().getCityName()); 
+	
+	  City destinationCity = cityService.getByCityName(theTrip.getDestinationCity().getCityName()); 
+	  
+	 List<Trip> trips = tripService.getTripsByCriteria(soucrceCity, destinationCity, theTrip.getTripDate());
+	  
+	 return trips;
+	  }
+	 
+	
 }

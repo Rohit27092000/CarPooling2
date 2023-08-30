@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User validateUser(String email, String password) {
 		// TODO Auto-generated method stub
-		return null;
+		return userRepository.validateUser(email, password);
 	}
 
 	@Override

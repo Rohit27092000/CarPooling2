@@ -1,6 +1,9 @@
 package com.app.Controller.CarOwner;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +17,7 @@ import com.app.Entity.User;
 import com.app.Service.CarOwner.CarOwnerService;
 import com.app.Service.User.UserService;
 
-@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/CarOwner")
 public class CarOwnerController {
@@ -40,15 +43,22 @@ public class CarOwnerController {
 	 }
 	 
 	@PostMapping("/addCarOwner")
-	public String addCarOwner(@RequestBody CarOwner theCarOwner)
+	public String addCarOwner(@RequestBody @Valid CarOwner theCarOwner,BindingResult result)
 	{
-		System.out.println(theCarOwner.toString());
-		int userId = theCarOwner.getUser().getId();
-		User theUser = userService.findById(userId);
-		theCarOwner.setUser(theUser);
-		
-		theCarOwner.setCarOwnerId(0);
-		return carOwnerService.addCarOwner(theCarOwner);
+		if(result.hasErrors())
+		{
+			return result.toString();
+		}
+		else
+		{
+			System.out.println(theCarOwner.toString());
+			int userId = theCarOwner.getUser().getId();
+			User theUser = userService.findById(userId);
+			
+			theCarOwner.setUser(theUser);
+			theCarOwner.setCarOwnerId(0);
+			return carOwnerService.addCarOwner(theCarOwner);
+		}
 		
 	}
 }

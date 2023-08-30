@@ -41,4 +41,11 @@ public class CityController {
 		System.out.println(theCity.toString());
 		return cityService.addCity(theCity);
 	}
+	
+	@GetMapping("/getByCityName/{theCity}")
+	public City getByCityName(@PathVariable String theCity)
+	{
+		return cityService.getByCityName(theCity);
+		
+	}
 }

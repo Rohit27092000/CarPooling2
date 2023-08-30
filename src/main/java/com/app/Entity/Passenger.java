@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.NumberFormat;
 
 @Entity
 @Table(name ="passenger")
@@ -20,13 +23,15 @@ private int passenger_Id;
 
 
 @OneToOne(cascade = CascadeType.ALL)
-@JoinColumn(name ="user_Id",nullable = false)
+@JoinColumn(name ="user_Id",nullable = false , unique = true)
 private User user;
 
-@Column(name = "AdharCard_No",nullable = false)
-private int aadharCard_No;
+@NumberFormat
+@Size(min = 12,max = 12 , message = "Aadhar card Number should 12 digit only")
+@Column(name = "AdharCard_No",nullable = false , unique = true)
+private long aadharCard_No;
 
-@Column(name = "driving_licence_no")
+@Column(name = "driving_licence_no", unique = true)
 private String driving_Licence_No;
 
 public int getPassenger_Id() {
@@ -45,11 +50,11 @@ public void setUser(User user) {
 	this.user = user;
 }
 
-public int getAadharCard_No() {
+public long getAadharCard_No() {
 	return aadharCard_No;
 }
 
-public void setAadharCard_No(int aadharCard_No) {
+public void setAadharCard_No(long aadharCard_No) {
 	this.aadharCard_No = aadharCard_No;
 }
 
@@ -66,6 +71,7 @@ public String toString() {
 	return "Passenger [passenger_Id=" + passenger_Id + ", user=" + user + ", aadharCard_No=" + aadharCard_No
 			+ ", driving_Licence_No=" + driving_Licence_No + "]";
 }
+
 
 
 }

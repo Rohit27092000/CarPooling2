@@ -38,4 +38,11 @@ public class CityServiceImpl implements CityService{
 		return "Success "+theCity.getCityName();
 	}
 
+
+	@Override
+	public City getByCityName(String theCity) {
+		// TODO Auto-generated method stub
+		return cityRepository.getByCityName(theCity);
+	}
+
 }
