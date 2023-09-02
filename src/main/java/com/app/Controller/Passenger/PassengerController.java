@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,12 +43,12 @@ public class PassengerController {
 		 return p;
 	 }
 	 
-	@PostMapping("/addPassengers")
-	public String addPassenger(@RequestBody @Valid Passenger thePassenger, BindingResult result)
+	@PutMapping("/addPassengers")
+	public String addPassenger(@RequestBody @Valid Passenger thePassenger, BindingResult result) throws Exception
 	{
 		if(result.hasErrors())
 		{
-			return result.toString();
+			throw new Exception(result.toString());
 		}
 		else
 		{

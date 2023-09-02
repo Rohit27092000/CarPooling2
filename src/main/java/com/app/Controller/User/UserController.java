@@ -1,7 +1,5 @@
 package com.app.Controller.User;
 
-import java.io.Serializable;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +35,11 @@ public class UserController {
 	
 	/*API to register users*/
 	@PostMapping("/registerUsers")
-	public String RegisterUser(@RequestBody @Valid User theUser,BindingResult result)
+	public String RegisterUser(@RequestBody @Valid User theUser,BindingResult result) throws CustomException
 	{
 		if(result.hasErrors())
 		{
-			return result.toString();
+			throw new CustomException(result.toString());
 		
 		}
 		else {
@@ -53,14 +51,14 @@ public class UserController {
 	}
 	/*API to Login users using EmailId and Password */
 	@PostMapping("/loginUser")
-	public User submitUser(@RequestBody @Valid User user , BindingResult result) throws CustomException
+	public User submitUser(@RequestBody @Valid User user , BindingResult result) throws Exception
 	{
 		System.out.println(user.toString());
 		User u = null;
 		
 		
 		if(result.hasErrors()){
-			//return null;
+			throw new Exception("Invalid Email ID");
 	
 		}else{
 			u= userService.validateUser(user.getEmail(), user.getPassword());
@@ -71,7 +69,6 @@ public class UserController {
 		if(u==null)
 		{
 			throw new CustomException("Wrong EmailId and Password");
-			//return null;
 		}
 		else
 		{
@@ -86,7 +83,7 @@ public class UserController {
 		return u;	
 	}
 	
-	public class CustomException extends Exception implements Serializable{
+	public class CustomException extends Exception{
 		
 		public CustomException(String errorMessage) {
 			super(errorMessage); 

@@ -9,8 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.NumberFormat;
 
 @Entity
@@ -26,8 +30,8 @@ private int passenger_Id;
 @JoinColumn(name ="user_Id",nullable = false , unique = true)
 private User user;
 
-@NumberFormat
-@Size(min = 12,max = 12 , message = "Aadhar card Number should 12 digit only")
+//@Max(value=12, message="must be equal or less than 12")  
+//@Range(min = 12,max = 12 , message = "Aadhar card Number should 12 digit only")
 @Column(name = "AdharCard_No",nullable = false , unique = true)
 private long aadharCard_No;
 
