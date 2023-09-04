@@ -71,8 +71,8 @@ public class tripController {
 		return tripService.addTrip(theTrip);
 	}
 	
-	
-	  @GetMapping("/getTripByCity") 
+	  @CrossOrigin
+	  @PostMapping("/getTripByCity") 
 	  public List<Trip> getTripByCity(@RequestBody Trip theTrip) 
 	  { 
 		  City soucrceCity = cityService.getByCityName(theTrip.getSourceCity().getCityName()); 
@@ -83,6 +83,4 @@ public class tripController {
 	  
 	 return trips;
 	  }
-	 
-	
 }
